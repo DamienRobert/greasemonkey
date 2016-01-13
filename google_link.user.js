@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Google Direct Link
 // @namespace   DamienRobert
-// @version     1
+// @version     2
 // @license     CC BY http://creativecommons.org/licenses/by/3.0/
 // @description Change google green cite results to direct links
 // @include     http*://www.google.tld/*
@@ -41,8 +41,8 @@ if (document.body){
 }
 
 function gst_checkNode(el){
-  if (el.nodeName == "LI") var liels = [el];
-  else var liels = el.querySelectorAll('li');
+  if (el.nodeName == "DIV" && el.className=="g") var liels = [el];
+  else var liels = el.querySelectorAll('div .g');
   if (liels.length > 0){
     var i, cite, ael;
     for (var i=0; i<liels.length; i++){
