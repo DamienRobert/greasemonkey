@@ -5,6 +5,6 @@ Greasemonkey scripts
 
 ## Copyright
 
-Copyright © 2014 Damien Robert
+Copyright © 2014–2016 Damien Robert
 
 MIT License. See {file:COPYING} for more details.
