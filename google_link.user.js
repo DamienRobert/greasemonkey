@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Google Direct Link
 // @namespace   DamienRobert
-// @version     2
+// @version     3
 // @license     CC BY http://creativecommons.org/licenses/by/3.0/
 // @description Change google green cite results to direct links
 // @include     http*://www.google.tld/*
@@ -28,6 +28,7 @@ if (document.body){
     chgMon = new MutOb(function(mutationSet){
       mutationSet.forEach(function(mutation){
         for (i=0; i<mutation.addedNodes.length; i++){
+          //nodeType==1 => Node.ELEMENT_NODE
           if (mutation.addedNodes[i].nodeType == 1){
             gst_checkNode(mutation.addedNodes[i]);
           }
@@ -56,18 +57,8 @@ function gst_checkNode(el){
           else {
             var ael = liels[i].querySelector("h3 a");
             if (!ael) ael = liels[i].querySelector("a");
-            if (ael){
-              if(ael.hasAttribute("href")) {
-                if (ael.getAttribute("href").indexOf("http")==0 || ael.getAttribute("href").indexOf("/interstitial")==0){
-                  linktitle=ael.getAttribute("href").substr(ael.getAttribute("href").indexOf("http"));
-                }
-                else {
-                  linktitle=cite.textContent;
-                }
-              }
-              else {
-                linktitle=cite.textContent;
-              }
+            if (ael && ael.hasAttribute("href") && (ael.getAttribute("href").indexOf("http")==0 || ael.getAttribute("href").indexOf("/interstitial")==0)){
+              linktitle=ael.getAttribute("href").substr(ael.getAttribute("href").indexOf("http"));
             }
             else {
               linktitle=cite.textContent;
